@@ -1,5 +1,6 @@
 package com.fareye.training.model;
 
+import com.fareye.training.helper.TitleValidation;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -9,6 +10,7 @@ import java.time.LocalDateTime;
 public class Todo {
 
     private int id;
+    @TitleValidation()
     private String title;
     private String body;
     private LocalDateTime createdAt;
