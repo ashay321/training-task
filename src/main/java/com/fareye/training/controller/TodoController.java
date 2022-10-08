@@ -3,12 +3,14 @@ import com.fareye.training.model.Todo;
 
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
-import java.util.HashMap;
+import javax.validation.*;
+import java.lang.annotation.*;
+import java.util.*;
 
 @RestController
 public class TodoController {
-    HashMap<Integer, Todo> todos = new HashMap<Integer, Todo>();
+    private static HashMap<Integer, Todo> todos = new HashMap<Integer, Todo>();
+    Set<String> titles = new HashSet<>();
     int todoId;
 
     @GetMapping("/todos")
@@ -20,6 +22,8 @@ public class TodoController {
     public HashMap<Integer, Todo> addTask(@Valid @RequestBody Todo task) {
         task.setId(todoId);
         todos.put(task.getId(), task);
+        titles.add(task.getTitle());
+
         todoId++;
 
         return todos;
@@ -33,6 +37,8 @@ public class TodoController {
         }
         task.setId(id);
         todos.put(id, task);
+        titles.add(task.getTitle());
+
         return todos.get(id);
     }
 
@@ -42,8 +48,28 @@ public class TodoController {
         if(!todos.containsKey(id)) {
             throw new Exception("ID does not exist");
         }
+        titles.remove(todos.get(id).getTitle());
         todos.remove(id);
     }
 
+    @Target( { ElementType.FIELD, ElementType.PARAMETER })
+    @Retention(RetentionPolicy.RUNTIME)
+    @Documented
+    @Constraint(validatedBy = TitleValidator.class)
+    public @interface DuplicateTitle {
+        //error message
+        public String message() default "Duplicate title!! Please change the title.";
+        //represents group of constraints
+        public Class<?>[] groups() default {};
+        //represents additional information about annotation
+        public Class<? extends Payload>[] payload() default {};
+    }
+
+    public class TitleValidator implements ConstraintValidator<DuplicateTitle, String>
+    {
+        public boolean isValid(String title, ConstraintValidatorContext cxt) {
+            return ! titles.contains(title);
+        }
+    }
 
 }

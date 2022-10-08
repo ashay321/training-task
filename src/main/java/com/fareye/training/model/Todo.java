@@ -1,6 +1,7 @@
 package com.fareye.training.model;
 
-import com.fareye.training.helper.TitleValidation;
+import com.fareye.training.controller.TodoController;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -10,7 +11,7 @@ import java.time.LocalDateTime;
 public class Todo {
 
     private int id;
-    @TitleValidation()
+    @TodoController.DuplicateTitle()
     private String title;
     private String body;
     private LocalDateTime createdAt;
