@@ -1,5 +1,6 @@
 package com.fareye.training.model;
 
+import com.fareye.training.services.GithubApi;
 import com.fareye.training.services.Password;
 import lombok.Getter;
 import lombok.Setter;
@@ -12,6 +13,10 @@ public class User {
 
     private String firstName;
     private String lastName;
+
+    private String username;
+
+    private String userAvatar;
     private String email;
     private Boolean verified;
     private LocalDateTime createdAt;
@@ -21,9 +26,15 @@ public class User {
     private String role;
     private Boolean active;
 
-    public User(String firstName, String lastName, String email, String password) {
+    public User(String firstName, String lastName, String username, String email, String password) {
+
         this.firstName = firstName;
         this.lastName = lastName;
+        this.username = username;
+
+        GithubApi githubApi = new GithubApi();
+        this.userAvatar = githubApi.getUserAvatar(username);
+
         this.email = email;
         this.verified = Boolean.FALSE;
         this.createdAt = LocalDateTime.now();
