@@ -4,13 +4,15 @@ import com.fareye.training.helper.DuplicateTitle;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
 @Getter @Setter
 public class Todo {
 
     private int id;
-    @DuplicateTitle()
+    @DuplicateTitle @NotBlank
     private String title;
     private String body;
     private LocalDateTime createdAt;

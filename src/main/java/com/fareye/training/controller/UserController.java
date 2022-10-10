@@ -3,6 +3,7 @@ package com.fareye.training.controller;
 import com.fareye.training.model.User;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,7 +18,7 @@ public class UserController {
     }
 
     @PostMapping("/users")
-    public List<User> createUser(@RequestBody User user) {
+    public List<User> createUser(@Valid @RequestBody User user) {
         users.add(user);
         return users;
     }

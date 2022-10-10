@@ -5,24 +5,24 @@ import com.fareye.training.services.Password;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 import java.util.Random;
 
 @Getter @Setter
 public class User {
-
+    @NotBlank
     private String firstName;
     private String lastName;
-
+    @NotNull
     private String username;
-
     private String userAvatar;
     private String email;
     private Boolean verified;
     private LocalDateTime createdAt;
     private String password;
     private Integer userId;
-
     private String role;
     private Boolean active;
 
