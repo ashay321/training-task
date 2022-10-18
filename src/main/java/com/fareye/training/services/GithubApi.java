@@ -1,19 +1,33 @@
 package com.fareye.training.services;
 
+import com.fasterxml.jackson.annotation.JacksonInject;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.http.*;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.Arrays;
 
+
+@Service
 public class GithubApi {
+
     @Autowired
-    RestTemplate restTemplate;
+    private RestTemplate restTemplate;
+
+
 
     public String getUserAvatar(String username) {
         String avatarUrl = "";
+//        restTemplate = new RestTemplate();
 
         HttpHeaders headers = new HttpHeaders();
         headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
