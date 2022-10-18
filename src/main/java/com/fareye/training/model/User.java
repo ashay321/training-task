@@ -32,8 +32,7 @@ public class User {
         this.lastName = lastName;
         this.username = username;
 
-        GithubApi githubApi = new GithubApi();
-        this.userAvatar = githubApi.getUserAvatar(username);
+        this.userAvatar = "njnj";
 
         this.email = email;
         this.verified = Boolean.FALSE;
