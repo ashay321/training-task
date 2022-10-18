@@ -14,7 +14,10 @@ public class Todo {
     private int id;
     @DuplicateTitle @NotBlank
     private String title;
+
+    @NotBlank
     private String body;
+
     private LocalDateTime createdAt;
     private LocalDateTime deadline;
     private LocalDateTime modifiedAt;
