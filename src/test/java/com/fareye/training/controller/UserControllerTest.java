@@ -64,16 +64,15 @@ class UserControllerTest {
 
         UserController cont = new UserController();
 
-        if(cont.getUsersData().containsKey(idToBeDeleted)) {
-            try {
-                ResponseEntity res = cont.deleteTask(idToBeDeleted);
+        try {
+            ResponseEntity res = cont.deleteTask(idToBeDeleted);
 
-                assertEquals(res.getStatusCode(), HttpStatus.NO_CONTENT);
-                assertEquals(cont.getUsersData().containsKey(idToBeDeleted), false);
-            } catch (Exception e) {
-                assertEquals(e.getMessage(), "ID Does not exist");
-            }
+            assertEquals(res.getStatusCode(), HttpStatus.NO_CONTENT);
+            assertEquals(cont.getUsersData().containsKey(idToBeDeleted), false);
+        } catch (Exception e) {
+            assertEquals(e.getMessage(), "ID does not exist");
         }
+
     }
 
 
