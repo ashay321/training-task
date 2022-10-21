@@ -19,7 +19,7 @@ public class TodoController {
     public HashMap<Integer, Todo> getTasks() {
         return todos;
     }
-
+    
     @PostMapping("/todos")
     public HashMap<Integer, Todo> addTask(@Valid @RequestBody Todo task) {
         task.setId(todoId);
